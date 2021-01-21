@@ -2,11 +2,11 @@
   "name": "auth-service",
   "version": "1.0.0",
   "description": "API para realizar Sign In e Sign Up com Node.js",
-  "main": "./src/infrasctructure/server/server.js",
+  "main": "./src/main/server/server.js",
   "scripts": {
     "test": "jest --coverage --passWithNoTests",
     "test:staged": "jest --silent --passWithNoTests",
-    "dev": "nodemon src/infrascructure/server/server.js"
+    "dev": "nodemon src/main/server/server.js"
   },
   "repository": {
     "type": "git",
