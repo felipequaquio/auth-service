@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/felipequaquio/auth-service/issues"
   },
-  "homepage": "https://github.com/felipequaquio/auth-service#readme"
+  "homepage": "https://github.com/felipequaquio/auth-service#readme",
+  "devDependencies": {
+    "eslint": "^7.18.0"
+  }
 }
