@@ -4,7 +4,7 @@
   "description": "API para realizar Sign In e Sign Up com Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "jest --passWithNoTest",
+    "test": "jest --passWithNoTests",
     "test:staged": "npm test --silent"
   },
   "repository": {
