@@ -22,6 +22,8 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Rodando a aplicação manualmente**
 
+**Alterar a variável de ambiente DB_URI para 127.0.0.1 no lugar de db ou descomentar a linha com esta configuração**
+
 **1-** Acesse a raiz do projeto e execute: **npm run dev**
 
 **2-** O MongoDB local deverá estar em execução para realizar a conexão
