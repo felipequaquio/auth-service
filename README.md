@@ -22,13 +22,15 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **run-containers.sh ou execute o comando docker-compose up**
 
-**Rodando a aplicação manualmente**
+**Rodando a aplicação manualmente em ambiente local**
 
 **Alterar a variável de ambiente DB_URI para 127.0.0.1 no lugar de db ou descomentar a linha com esta configuração**
 
-**1-** Acesse a raiz do projeto e execute: **npm run dev**
+**1-** Acesse a raiz do projeto e execute: **npm install**
 
-**2-** O MongoDB local deverá estar em execução para realizar a conexão
+**2-** Após instalar as dependências, execute **npm run dev**
+
+**3-** O MongoDB local deverá estar em execução para realizar a conexão
 
 **Executando testes**
 
