@@ -9,5 +9,11 @@ module.exports = {
     return {
       mensagem: error.message
     }
+  },
+
+  unauthorized (error) {
+    return {
+      mensagem: error.message
+    }
   }
 }
