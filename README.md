@@ -6,7 +6,7 @@ API Para Realizar Sign In e Sign Up de usuários com Node.js e MongoDB
 
 Para rodar a aplicação, siga os passos abaixo:
 
-**Antes de seguir os passos abaixo, acesse a raíz do projeto, duplique o arquivo .env.example e renomeie para .env, e altere os valores das variáveis com os valores desejados. Recomenda-se manter a porta do mongodb.**
+**Antes de seguir os passos abaixo, acesse a raíz do projeto, duplique o arquivo .env.example e renomeie para .env e altere os valores das variáveis com os valores desejados. Recomenda-se manter a porta do mongodb.**
 
 **Utilizando o Docker**
 
@@ -16,9 +16,9 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Link para instalação do Docker Desktop:** **https://www.docker.com/products/docker-desktop**
 
-**1-** Baixe o docker através do link, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
+**1-** Baixe o Docker através do link, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
 
-**2-** Baixe o docker compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
+**2-** Baixe o Docker Compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
 
 **3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **run-containers.sh ou execute o comando docker-compose up**
 
@@ -35,3 +35,47 @@ Para rodar a aplicação, siga os passos abaixo:
 **Executando testes**
 
 Para executar testes, caso esteja rodando a aplicação **com Docker, acesse a raiz do projeto e execute o script test.sh**.  Para executar os testes manualmente, acesse a raiz do projeto e execute o comando npm test.
+
+### Rotas:
+
+**Rota: /signup | -X POST | -H Content-Type: application/json**
+
+**Body:**
+```
+{
+  "nome" : "Teste",
+  "email" : "mail@mail.com",
+  "senha" : "123abc",
+  "telefones" : [
+     {
+       "telefone" : "88888888",
+       "ddd" : "32"
+     },
+     {
+       "telefone" : "99999999",
+       "ddd" : "32"
+     }
+	 ]
+}
+```
+
+**Rota: /signin | -X POST | -H Content-Type: application/json**
+
+**Body:**
+```
+{
+  "email": "mail@mail.com"
+  "senha": "123abc"
+}
+```
+
+**Rota: /users/:id | -X GET | -H authorization: Bearer {token}**
+
+**Body:**
+```
+{
+  "email": "mail@mail.com"
+  "senha": "123abc"
+}
+```
+
