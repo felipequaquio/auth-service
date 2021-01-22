@@ -98,15 +98,21 @@ module.exports = class UserController {
 
   async getUser (request, response) {
     try {
+      const bearerToken = request.headers.authorization
+      const token = bearerToken.replace('Bearer ', '')
       const { id } = request.params
 
       const getUserUseCase = new GetUserUseCase()
 
       const user = await getUserUseCase.getUser(id)
 
-      delete user.senha
+      if (user && user[0].token === token) {
+        return response.json(user)
+      }
 
-      return response.json(user)
+      return response.status(401).json({
+        mensagem: 'Permissão negada para acessar este recurso.'
+      })
     } catch (error) {
       return response.status(500)
     }
