@@ -4,12 +4,12 @@ const MissingParamError = require('../../utils/errors/missing-param-error')
 
 module.exports = async (request, response, next) => {
   const bearerToken = request.headers.authorization
-  const token = bearerToken.replace('Bearer ', '')
 
-  if (!token) {
+  if (!bearerToken) {
     return response.status(400)
       .json(HttpResponse.badRequest(new MissingParamError('Token')))
   }
+  const token = bearerToken.replace('Bearer ', '')
 
   const tokenStatus = new TokenHandler().tokenStatus(token)
 
