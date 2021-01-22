@@ -1,5 +1,5 @@
 const express = require('express')
-const routes = require('../routes')
+const routes = require('../../interfaces/routes')
 const invalidEndpoint = require('../midlewares/invalid-endpoint')
 const requestTypesAcceptable = require('../midlewares/requests-types-acceptable')
 const app = express()
