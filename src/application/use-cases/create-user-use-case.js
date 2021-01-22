@@ -1,4 +1,4 @@
-const UserRepository = require('../main/repositories/user-repository')
+const UserRepository = require('../../infrastructure/repositories/user-repository')
 
 module.exports = class CreateUserUseCase {
   async create (httpRequestUserData) {

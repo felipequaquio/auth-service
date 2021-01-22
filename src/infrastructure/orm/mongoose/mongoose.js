@@ -5,7 +5,8 @@ const dbName = env.DB_NAME
 
 mongoose.connect(`${dbUri}/${dbName}`, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false
 })
 
 const db = mongoose.connection
