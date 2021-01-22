@@ -6,7 +6,7 @@ API Para Realizar Sign In e Sign Up de usuários com Node.js e MongoDB
 
 Para rodar a aplicação, siga os passos abaixo:
 
-**Antes de seguir os passos abaixo, altere as variáveis de ambiente com os valores desejados. Recomenda-se manter a porta do mongodb**
+**Antes de seguir os passos abaixo, acesse a raíz do projeto, duplique o arquivo .env.example e renomeie para .env, e altere os valores das variáveis com os valores desejados. Recomenda-se manter a porta do mongodb.**
 
 **Utilizando o Docker**
 
