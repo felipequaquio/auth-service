@@ -14,9 +14,9 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Link para instalação do Docker Desktop:** **https://www.docker.com/products/docker-desktop**
 
-**1-** Baixe o docker através do link abaixo, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
+**1-** Baixe o docker através do link, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
 
-**2-** Baixe o docker compose através do link abaixo: **https://docs.docker.com/compose/install/**
+**2-** Baixe o docker compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
 
 **3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **run-containers.sh ou execute o comando docker-compose up**
 
