@@ -1,6 +1,6 @@
 const UserRepository = require('../../infrastructure/repositories/user-repository')
 
-module.exports = class CreateUserUseCase {
+module.exports = class FindUserByEmailUseCase {
   async findUserByEmail (email) {
     const userRepository = new UserRepository()
     const user = await userRepository.findUserByEmail(email)
