@@ -6,6 +6,8 @@ API Para Realizar Sign In e Sign Up de usuários com Node.js e MongoDB
 
 Para rodar a aplicação, siga os passos abaixo:
 
+**Antes de seguir os passos abaixo, altere as variáveis de ambiente com os valores desejados. Recomenda-se manter a porta do mongodb**
+
 **Utilizando o Docker**
 
 **OBS: caso utilize Windows, é recomendável instalar e configurar o WSL2 e o Docker Desktop**
