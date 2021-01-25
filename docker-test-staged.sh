@@ -1,0 +1,1 @@
+docker-compose exec -T authservice npm run test:staged
