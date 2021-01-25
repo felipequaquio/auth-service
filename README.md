@@ -6,7 +6,7 @@ API Para Realizar Sign In e Sign Up de usuários com Node.js e MongoDB
 
 Para rodar a aplicação, siga os passos abaixo:
 
-**Antes de seguir os passos abaixo, acesse a raíz do projeto, duplique o arquivo .env.example e renomeie para .env e altere os valores das variáveis com os valores desejados. Recomenda-se manter a porta do mongodb.**
+**Antes de seguir os passos abaixo, acesse a raíz do projeto, duplique o arquivo .env.example e renomeie para .env e altere os valores das variáveis com os valores desejados. Para executar a aplicação com o Docker, altere a variável de ambientev USING_DOCKER para true. Para executar sem o Docker, altere o valor para false. Recomenda-se manter a porta do mongodb.**
 
 **Utilizando o Docker**
 
@@ -20,7 +20,9 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **2-** Baixe o Docker Compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
 
-**3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **run-containers.sh ou execute o comando docker-compose up**
+**3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **docker-run-containers.sh ou execute o comando docker-compose up**
+
+**4-** Execute o comando **npm install** na raiz do projeto, para instalar as dependências necessárias para executar o eslint
 
 **Rodando a aplicação manualmente em ambiente local**
 
@@ -34,7 +36,7 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Executando testes**
 
-Para executar testes, caso esteja rodando a aplicação **com Docker, acesse a raiz do projeto e execute o script test.sh**.  Para executar os testes manualmente, acesse a raiz do projeto e execute o comando npm test.
+Para executar testes, caso esteja rodando a aplicação **com Docker, acesse a raiz do projeto e execute o script docker-test.sh**.  Para executar os testes manualmente, acesse a raiz do projeto e execute o comando **npm test**.
 
 ### Rotas:
 
