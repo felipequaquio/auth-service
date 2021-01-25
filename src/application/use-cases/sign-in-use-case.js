@@ -1,4 +1,4 @@
-module.exports = class CreateUserUseCase {
+module.exports = class SignInUseCase {
   constructor (userRepository, tokenHandler, passwordEncrypter) {
     this.userRepository = userRepository
     this.tokenHandler = tokenHandler
