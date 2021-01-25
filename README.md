@@ -16,13 +16,13 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Link para instalação do Docker Desktop:** **https://www.docker.com/products/docker-desktop**
 
-**1-** Baixe o Docker através do link, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
+**1-** Execute o comando **npm install** na raiz do projeto, para instalar as dependências necessárias para executar o eslint
 
-**2-** Baixe o Docker Compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
+**2-** Baixe o Docker através do link, conforme seu sistema operacional: **https://docs.docker.com/get-docker/**
 
-**3-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **docker-run-containers.sh ou execute o comando docker-compose up**
+**3-** Baixe o Docker Compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
 
-**4-** Execute o comando **npm install** na raiz do projeto, para instalar as dependências necessárias para executar o eslint
+**4-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **docker-run-containers.sh ou execute o comando docker-compose up**
 
 **Rodando a aplicação manualmente em ambiente local**
 
