@@ -15,5 +15,11 @@ module.exports = {
     return {
       mensagem: error.message
     }
+  },
+
+  internalServerError (error) {
+    return {
+      mensagem: error.message
+    }
   }
 }
