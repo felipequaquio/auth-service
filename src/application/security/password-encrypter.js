@@ -1,10 +1,15 @@
 const bcrypt = require('bcrypt')
+const InternalServerError = require('../../utils/errors/internal-server-error')
 
 module.exports = class PasswordEncrypter {
-  async passwordHash (password) {
-    const passwordHashed = await bcrypt.hashSync(password, 10)
+  passwordHash (password) {
+    try {
+      const passwordHashed = bcrypt.hashSync(password, 10)
 
-    return passwordHashed
+      return passwordHashed
+    } catch (error) {
+      throw new InternalServerError()
+    }
   }
 
   async passwordEquals (password, passwordHashed) {
