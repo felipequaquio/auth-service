@@ -26,8 +26,6 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **Rodando a aplicação manualmente em ambiente local**
 
-**Alterar a variável de ambiente DB_URI para 127.0.0.1 no lugar de db ou descomentar a linha com esta configuração**
-
 **1-** Acesse a raiz do projeto e execute: **npm install**
 
 **2-** Após instalar as dependências, execute **npm run dev**
