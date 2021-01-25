@@ -1,5 +1,5 @@
 const router = require('express').Router()
-const userControllerFactory = require('../factories/user-controller-factory')
+const userControllerFactory = require('../controllers/factories/user-controller-factory')
 const verifyTokenMidleware = require('../../infrastructure/midlewares/verify-token')
 
 router.post('/signup', userControllerFactory.getInstance().create)
