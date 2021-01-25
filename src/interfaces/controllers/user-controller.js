@@ -2,6 +2,7 @@ const HttpResponse = require('../../utils/helpers/http-response')
 const MissingParamError = require('../../utils/errors/missing-param-error')
 const ConflictError = require('../../utils/errors/conflict-error')
 const UnauthorizedError = require('../../utils/errors/unauthorized-error')
+const InternalServerError = require('../../utils/errors/internal-server-error')
 
 module.exports = class UserController {
   constructor (createUserUseCase, signInUseCase, getUserByIdUseCase) {
@@ -53,26 +54,32 @@ module.exports = class UserController {
       })
     } catch (error) {
       return response.status(500)
+        .json(HttpResponse.internalServerError(new InternalServerError()))
     }
   }
 
   async signIn (request, response) {
-    const data = request.body
+    try {
+      const data = request.body
 
-    const userIsSigned = await this.signInUseCase.signIn(data)
+      const userIsSigned = await this.signInUseCase.signIn(data)
 
-    if (userIsSigned) {
-      return response.status(200).json({
-        id: userIsSigned._id,
-        data_criacao: userIsSigned.data_criacao,
-        data_atualizacao: userIsSigned.data_atualizacao,
-        ultimo_login: userIsSigned.ultimo_login,
-        token: userIsSigned.token
-      })
+      if (userIsSigned) {
+        return response.status(200).json({
+          id: userIsSigned._id,
+          data_criacao: userIsSigned.data_criacao,
+          data_atualizacao: userIsSigned.data_atualizacao,
+          ultimo_login: userIsSigned.ultimo_login,
+          token: userIsSigned.token
+        })
+      }
+
+      return response.status(401)
+        .json(HttpResponse.unauthorized(new UnauthorizedError()))
+    } catch (error) {
+      return response.status(500)
+        .json(HttpResponse.internalServerError(new InternalServerError()))
     }
-
-    return response.status(401)
-      .json(HttpResponse.unauthorized(new UnauthorizedError()))
   }
 
   async getUserById (request, response) {
@@ -92,6 +99,7 @@ module.exports = class UserController {
       })
     } catch (error) {
       return response.status(500)
+        .json(HttpResponse.internalServerError(new InternalServerError()))
     }
   }
 }
