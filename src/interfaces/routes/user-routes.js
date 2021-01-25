@@ -1,11 +1,9 @@
 const router = require('express').Router()
-const UserController = require('../../interfaces/controllers/user-controller')
+const userControllerFactory = require('../factories/user-controller-factory')
 const verifyTokenMidleware = require('../../infrastructure/midlewares/verify-token')
 
-const userController = new UserController()
-
-router.get('/user/:id', verifyTokenMidleware, userController.getUser)
-router.post('/signup', userController.create)
-router.post('/signin', userController.signIn)
+router.post('/signup', userControllerFactory.getInstance().create)
+router.post('/signin', userControllerFactory.getInstance().signIn)
+router.get('/user/:id', verifyTokenMidleware, userControllerFactory.getInstance().getUserById)
 
 module.exports = router

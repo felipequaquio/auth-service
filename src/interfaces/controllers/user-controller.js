@@ -2,52 +2,47 @@ const HttpResponse = require('../../utils/helpers/http-response')
 const MissingParamError = require('../../utils/errors/missing-param-error')
 const ConflictError = require('../../utils/errors/conflict-error')
 const UnauthorizedError = require('../../utils/errors/unauthorized-error')
-const CreateUserUseCase = require('../../application/use-cases/create-user-use-case')
-const UpdateUserUseCase = require('../../application/use-cases/update-user-use-case')
-const GetUserUseCase = require('../../application/use-cases/get-user-use-case')
-const FindUserByEmailUseCase = require('../../application/use-cases/find-user-by-email-use-case')
-const PasswordEncrypter = require('../../application/security/password-encrypter')
-const TokenHandler = require('../../application/security/token-handler')
 
 module.exports = class UserController {
+  constructor (createUserUseCase, signInUseCase, getUserByIdUseCase) {
+    this.createUserUseCase = createUserUseCase
+    this.signInUseCase = signInUseCase
+    this.getUserByIdUseCase = getUserByIdUseCase
+    this.create = this.create.bind(this)
+    this.signIn = this.signIn.bind(this)
+    this.getUserById = this.getUserById.bind(this)
+  }
+
   async create (request, response) {
     try {
-      const { nome, email, senha, telefones } = request.body
+      const data = request.body
 
-      if (!nome) {
+      if (!data.nome) {
         return response.status(400)
           .json(HttpResponse.badRequest(new MissingParamError('nome')))
       }
 
-      if (!email) {
+      if (!data.email) {
         return response.status(400)
           .json(HttpResponse.badRequest(new MissingParamError('email')))
       }
 
-      if (!senha) {
+      if (!data.senha) {
         return response.status(400)
           .json(HttpResponse.badRequest(new MissingParamError('senha')))
       }
 
-      if (!telefones) {
+      if (!data.telefones) {
         return response.status(400)
           .json(HttpResponse.badRequest(new MissingParamError('telefones')))
       }
 
-      const userExists = await new FindUserByEmailUseCase().findUserByEmail(email)
+      const user = await this.createUserUseCase.create(data)
 
-      if (userExists) {
+      if (!user) {
         return response.status(409)
           .json(HttpResponse.conflict(new ConflictError('email')))
       }
-
-      const token = await new TokenHandler().generate(email)
-
-      const hashedPassword = await new PasswordEncrypter().passwordHash(senha)
-
-      const user = await new CreateUserUseCase().create({
-        nome, email, senha: hashedPassword, telefones, token
-      })
 
       return response.status(201).json({
         id: user._id,
@@ -62,33 +57,17 @@ module.exports = class UserController {
   }
 
   async signIn (request, response) {
-    const { email, senha } = request.body
+    const data = request.body
 
-    const user = await new FindUserByEmailUseCase().findUserByEmail(email)
+    const userIsSigned = await this.signInUseCase.signIn(data)
 
-    if (!user) {
-      return response.status(401)
-        .json(HttpResponse.unauthorized(new UnauthorizedError()))
-    }
-
-    const passwordIsValid = await new PasswordEncrypter()
-      .passwordEquals(senha, user.senha)
-
-    if (passwordIsValid) {
-      const token = new TokenHandler().generate(email)
-
-      const currentDate = Date.now()
-
-      const userUpdated = await new UpdateUserUseCase().update({
-        _id: user.id, token, ultimo_login: currentDate, data_atualizacao: currentDate
-      })
-
+    if (userIsSigned) {
       return response.status(200).json({
-        id: userUpdated._id,
-        data_criacao: userUpdated.data_criacao,
-        data_atualizacao: userUpdated.data_atualizacao,
-        ultimo_login: userUpdated.ultimo_login,
-        token: userUpdated.token
+        id: userIsSigned._id,
+        data_criacao: userIsSigned.data_criacao,
+        data_atualizacao: userIsSigned.data_atualizacao,
+        ultimo_login: userIsSigned.ultimo_login,
+        token: userIsSigned.token
       })
     }
 
@@ -96,17 +75,15 @@ module.exports = class UserController {
       .json(HttpResponse.unauthorized(new UnauthorizedError()))
   }
 
-  async getUser (request, response) {
+  async getUserById (request, response) {
     try {
       const bearerToken = request.headers.authorization
       const token = bearerToken.replace('Bearer ', '')
       const { id } = request.params
 
-      const getUserUseCase = new GetUserUseCase()
+      const user = await this.getUserByIdUseCase.getUser(id, token)
 
-      const user = await getUserUseCase.getUser(id)
-
-      if (user && user[0].token === token) {
+      if (user) {
         return response.json(user)
       }
 
