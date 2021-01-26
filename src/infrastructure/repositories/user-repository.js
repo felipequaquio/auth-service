@@ -4,7 +4,7 @@ module.exports = class UserRepository {
   async getUserById (id) {
     const user = await mongooseUserSchema.find({ _id: id })
 
-    return user
+    return user[0]
   }
 
   async create (userData) {
