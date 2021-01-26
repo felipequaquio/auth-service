@@ -22,7 +22,7 @@ Para rodar a aplicação, siga os passos abaixo:
 
 **3-** Baixe o Docker Compose através do link, conforme seu sistema operacional: **https://docs.docker.com/compose/install/**
 
-**4-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o script: **docker-run-containers.sh ou execute o comando docker-compose up**
+**4-** Após instalar o Docker e o Docker Compose, acesse a raiz do projeto e execute o comando **docker-compose up**
 
 **Rodando a aplicação manualmente em ambiente local**
 
