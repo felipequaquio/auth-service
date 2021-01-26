@@ -88,7 +88,7 @@ module.exports = class UserController {
       const token = bearerToken.replace('Bearer ', '')
       const { id } = request.params
 
-      const user = await this.getUserByIdUseCase.getUser(id, token)
+      const user = await this.getUserByIdUseCase.getUserById(id, token)
 
       if (user) {
         return response.json(user)

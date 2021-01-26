@@ -1,12 +1,12 @@
-module.exports = class GetUserUseCase {
+module.exports = class GetUserByIdUseCase {
   constructor (userRepository) {
     this.userRepository = userRepository
   }
 
-  async getUser (id, token) {
+  async getUserById (id, token) {
     const user = await this.userRepository.getUserById(id)
 
-    if (user && user[0].token === token) {
+    if (user && user.token === token) {
       return user
     }
 
