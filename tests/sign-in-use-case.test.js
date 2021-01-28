@@ -31,7 +31,7 @@ describe('Sign in user use case tests', () => {
         data_atualizacao: 'data atualizacao',
         token: 'token-generated'
       })
-      jest.spyOn(PasswordEncrypter.prototype, 'passwordEquals').mockReturnValue(true)
+      jest.spyOn(PasswordEncrypter.prototype, 'comparePasswords').mockReturnValue(true)
       jest.spyOn(TokenHandler.prototype, 'generate').mockReturnValue('token')
       jest.spyOn(UserRepository.prototype, 'update').mockReturnValue({
         id: 'id',
@@ -45,29 +45,32 @@ describe('Sign in user use case tests', () => {
       expect(result).toHaveProperty('token')
       expect(result.token).toBe('token-generated')
     })
-  })
 
-  test('Should return null if user not exist', async () => {
-    const userData = {
-      email: 'mail@mail.com',
-      senha: '123abc'
-    }
-
-    jest.spyOn(UserRepository.prototype, 'findUserByEmail').mockReturnValue(null)
-
-    const result = await signInUseCase.signIn(userData)
-
-    expect(result).toBe(null)
-  })
-
-  describe('Error', () => {
     test('Should return null if password is not valid', async () => {
+      jest.spyOn(UserRepository.prototype, 'findUserByEmail').mockReturnValue({
+        nome: 'Teste',
+        email: 'mail@mail.com',
+        senha: 'password'
+      })
+      jest.spyOn(PasswordEncrypter.prototype, 'comparePasswords').mockReturnValue(false)
+
+      const userData = {
+        email: 'mail@mail.com',
+        senha: 'password'
+      }
+
+      const result = await signInUseCase.signIn(userData)
+
+      expect(result).toBe(null)
+    })
+
+    test('Should return null if user not exist', async () => {
+      jest.spyOn(UserRepository.prototype, 'findUserByEmail').mockReturnValue(null)
+
       const userData = {
         email: 'mail@mail.com',
         senha: '123abc'
       }
-
-      jest.spyOn(PasswordEncrypter.prototype, 'passwordEquals').mockReturnValue(false)
 
       const result = await signInUseCase.signIn(userData)
 

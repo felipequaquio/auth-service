@@ -12,12 +12,17 @@ module.exports = class PasswordEncrypter {
     }
   }
 
-  async passwordEquals (password, passwordHashed) {
-    const passwordsAreEquals = await bcrypt.compare(password, passwordHashed)
-    if (passwordsAreEquals) {
-      return true
-    }
+  async comparePasswords (password, passwordHashed) {
+    try {
+      const arePasswordsAreEquals = await bcrypt.compare(password, passwordHashed)
 
-    return false
+      if (arePasswordsAreEquals) {
+        return true
+      }
+
+      return false
+    } catch (error) {
+      throw new InternalServerError()
+    }
   }
 }
