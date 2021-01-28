@@ -14,38 +14,33 @@ module.exports = class UserController {
     this.getUserById = this.getUserById.bind(this)
   }
 
-  async create (request, response) {
+  async create (httpRequest) {
     try {
-      const data = request.body
+      const data = httpRequest.body
 
       if (!data.nome) {
-        return response.status(400)
-          .json(HttpResponse.badRequest(new MissingParamError('nome')))
+        return HttpResponse.badRequest(new MissingParamError('nome'))
       }
 
       if (!data.email) {
-        return response.status(400)
-          .json(HttpResponse.badRequest(new MissingParamError('email')))
+        return HttpResponse.badRequest(new MissingParamError('email'))
       }
 
       if (!data.senha) {
-        return response.status(400)
-          .json(HttpResponse.badRequest(new MissingParamError('senha')))
+        return HttpResponse.badRequest(new MissingParamError('senha'))
       }
 
       if (!data.telefones) {
-        return response.status(400)
-          .json(HttpResponse.badRequest(new MissingParamError('telefones')))
+        return HttpResponse.badRequest(new MissingParamError('telefones'))
       }
 
       const user = await this.createUserUseCase.create(data)
 
       if (!user) {
-        return response.status(409)
-          .json(HttpResponse.conflict(new ConflictError('email')))
+        return HttpResponse.conflict(new ConflictError('email'))
       }
 
-      return response.status(201).json({
+      return HttpResponse.created({
         id: user._id,
         data_criacao: user.data_criacao,
         data_atualizacao: user.data_atualizacao,
@@ -53,19 +48,18 @@ module.exports = class UserController {
         token: user.token
       })
     } catch (error) {
-      return response.status(500)
-        .json(HttpResponse.internalServerError(new InternalServerError()))
+      return HttpResponse.internalServerError(new InternalServerError())
     }
   }
 
-  async signIn (request, response) {
+  async signIn (httpRequest) {
     try {
-      const data = request.body
+      const data = httpRequest.body
 
       const userIsSigned = await this.signInUseCase.signIn(data)
 
       if (userIsSigned) {
-        return response.status(200).json({
+        return HttpResponse.success({
           id: userIsSigned._id,
           data_criacao: userIsSigned.data_criacao,
           data_atualizacao: userIsSigned.data_atualizacao,
@@ -74,32 +68,27 @@ module.exports = class UserController {
         })
       }
 
-      return response.status(401)
-        .json(HttpResponse.unauthorized(new UnauthorizedError()))
+      return HttpResponse.unauthorized(new UnauthorizedError())
     } catch (error) {
-      return response.status(500)
-        .json(HttpResponse.internalServerError(new InternalServerError()))
+      HttpResponse.internalServerError(new InternalServerError())
     }
   }
 
-  async getUserById (request, response) {
+  async getUserById (httpRequest) {
     try {
-      const bearerToken = request.headers.authorization
+      const bearerToken = httpRequest.headers.authorization
       const token = bearerToken.replace('Bearer ', '')
-      const { id } = request.params
+      const { id } = httpRequest.params
 
       const user = await this.getUserByIdUseCase.getUserById(id, token)
 
       if (user) {
-        return response.json(user)
+        return HttpResponse.success(user)
       }
 
-      return response.status(401).json({
-        mensagem: 'Permissão negada para acessar este recurso.'
-      })
+      return HttpResponse.unauthorized(new UnauthorizedError())
     } catch (error) {
-      return response.status(500)
-        .json(HttpResponse.internalServerError(new InternalServerError()))
+      return HttpResponse.internalServerError(new InternalServerError())
     }
   }
 }

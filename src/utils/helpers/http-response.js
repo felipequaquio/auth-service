@@ -1,25 +1,51 @@
 module.exports = {
+  created (data) {
+    return {
+      statusCode: 201,
+      body: data
+    }
+  },
+
+  success (data) {
+    return {
+      statusCode: 200,
+      body: data
+    }
+  },
+
   badRequest (error) {
     return {
-      mensagem: error.message
+      statusCode: 400,
+      body: {
+        mensagem: error.message
+      }
     }
   },
 
   conflict (error) {
     return {
-      mensagem: error.message
+      statusCode: 409,
+      body: {
+        mensagem: error.message
+      }
     }
   },
 
   unauthorized (error) {
     return {
-      mensagem: error.message
+      statusCode: 409,
+      body: {
+        mensagem: error.message
+      }
     }
   },
 
   internalServerError (error) {
     return {
-      mensagem: error.message
+      statusCode: 500,
+      body: {
+        mensagem: error.message
+      }
     }
   }
 }
