@@ -1,8 +1,8 @@
-const CreateUserUseCase = require('../src/application/use-cases/create-user-use-case')
-const MissingParamError = require('../src/utils/errors/missing-param-error')
-const TokenHandler = require('../src/application/security/token-handler')
-const PasswordEncrypter = require('../src/application/security/password-encrypter')
-const UserRepository = require('../src/infrastructure/repositories/user-repository')
+const CreateUserUseCase = require('../../src/application/use-cases/create-user-use-case')
+const MissingParamError = require('../../src/utils/errors/missing-param-error')
+const TokenHandler = require('../../src/application/security/token-handler')
+const PasswordEncrypter = require('../../src/application/security/password-encrypter')
+const UserRepository = require('../../src/infrastructure/repositories/user-repository')
 
 describe('Create user use case tests', () => {
   let createUserUseCase

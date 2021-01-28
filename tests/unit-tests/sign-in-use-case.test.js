@@ -1,7 +1,7 @@
-const SignInUseCase = require('../src/application/use-cases/sign-in-use-case')
-const TokenHandler = require('../src/application/security/token-handler')
-const PasswordEncrypter = require('../src/application/security/password-encrypter')
-const UserRepository = require('../src/infrastructure/repositories/user-repository')
+const SignInUseCase = require('../../src/application/use-cases/sign-in-use-case')
+const TokenHandler = require('../../src/application/security/token-handler')
+const PasswordEncrypter = require('../../src/application/security/password-encrypter')
+const UserRepository = require('../../src/infrastructure/repositories/user-repository')
 
 describe('Sign in user use case tests', () => {
   let signInUseCase

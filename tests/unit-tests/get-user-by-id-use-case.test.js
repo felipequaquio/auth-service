@@ -1,5 +1,5 @@
-const GetUserByIdUseCase = require('../src/application/use-cases/get-user-by-id-use-case')
-const UserRepository = require('../src/infrastructure/repositories/user-repository')
+const GetUserByIdUseCase = require('../../src/application/use-cases/get-user-by-id-use-case')
+const UserRepository = require('../../src/infrastructure/repositories/user-repository')
 
 describe('Get user by id use case tests', () => {
   let getUserByIdUseCase
