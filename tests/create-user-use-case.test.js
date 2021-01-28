@@ -59,18 +59,69 @@ describe('Create user use case tests', () => {
   })
 
   describe('Error', () => {
-    test('Should return error when missing param error', async () => {
+    test('Should return missing param error when name is not provided', async () => {
+      jest.spyOn(CreateUserUseCase.prototype, 'create').mockReturnValue(() => {
+        throw new MissingParamError('nome')
+      })
+      const userData = {
+        email: 'mail@mail.com',
+        senha: '123abc',
+        telefones: [{
+          numero: 99999999,
+          ddd: 32
+        }]
+      }
+
+      const user = await createUserUseCase.create(userData)
+      expect(user).toThrowError(new MissingParamError('nome'))
+    })
+
+    test('Should return missing param error when email is not provided', async () => {
+      jest.spyOn(CreateUserUseCase.prototype, 'create').mockReturnValue(() => {
+        throw new MissingParamError('email')
+      })
+      const userData = {
+        nome: 'Teste',
+        senha: '123abc',
+        telefones: [{
+          numero: 99999999,
+          ddd: 32
+        }]
+      }
+
+      const user = await createUserUseCase.create(userData)
+      expect(user).toThrowError(new MissingParamError('email'))
+    })
+
+    test('Should return missing param error when password is not provided', async () => {
+      jest.spyOn(CreateUserUseCase.prototype, 'create').mockReturnValue(() => {
+        throw new MissingParamError('senha')
+      })
+      const userData = {
+        nome: 'Teste',
+        email: 'mail@mail.com',
+        telefones: [{
+          numero: 99999999,
+          ddd: 32
+        }]
+      }
+
+      const user = await createUserUseCase.create(userData)
+      expect(user).toThrowError(new MissingParamError('senha'))
+    })
+
+    test('Should return missing param error when phones are not provided', async () => {
+      jest.spyOn(CreateUserUseCase.prototype, 'create').mockReturnValue(() => {
+        throw new MissingParamError('senha')
+      })
       const userData = {
         nome: 'Teste',
         email: 'mail@mail.com',
         senha: '123abc'
       }
 
-      try {
-        await createUserUseCase.create(userData)
-      } catch (error) {
-        expect(error).toBeInstanceOf(MissingParamError)
-      }
+      const user = await createUserUseCase.create(userData)
+      expect(user).toThrowError(new MissingParamError('senha'))
     })
   })
 })
