@@ -19,7 +19,11 @@ module.exports = class TokenHandler {
     try {
       const isTokenValid = jwt.verify(token, env.JWT_SECRET, (err, decoded) => {
         if (err) {
-          if (err.message === 'invalid signature' || err.message === 'jwt malformed') {
+          if (
+            err.message === 'invalid signature' ||
+            err.message === 'jwt malformed' ||
+            err.message === 'invalid token'
+          ) {
             return {
               status: 'invalid',
               message: 'Token inválido',
