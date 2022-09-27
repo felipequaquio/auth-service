@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
-const { uuid } = require('uuidv4')
+const { randomUUID } = require('crypto')
 
 const userSchema = new mongoose.Schema({
   _id: {
     type: String,
-    index: { unique: true },
-    default: uuid('v4')
+    default: () => randomUUID()
   },
   nome: String,
   email: String,
